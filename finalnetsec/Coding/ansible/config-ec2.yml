@@ -1,0 +1,46 @@
+---
+- name: Configure EC2 instance and install Docker
+  hosts: doc_servers
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    - name: Update all packages excluding amazon-linux-extras
+      shell: yum update -y --disablerepo=amazon-linux-extras
+      ignore_errors: true
+
+    - name: Update OpenSSL to 1.1.1 or later
+      shell: yum install -y openssl --disablerepo=amazon-linux-extras
+      ignore_errors: true
+
+    - name: Install Python 3, pip, and Docker
+      shell: yum install -y python3 python3-pip docker --disablerepo=amazon-linux-extras
+      ignore_errors: true
+
+    - name: Install Docker SDK for Python
+      pip:
+        name: docker
+        executable: pip3
+
+    - name: Ensure Docker is started and enabled
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Copy application files to the server
+      copy:
+        src: /home/ec2-user/docker
+        dest: /home/ec2-user/docker
+        owner: ec2-user
+        group: ec2-user
+        mode: '0755'
+
+    - name: Build Docker image
+      shell: docker build -t docker .
+      args:
+        chdir: /home/ec2-user/docker
+
+    - name: Run the Docker container
+      shell: docker run -d --name doccontainer -p 80:80 docker
