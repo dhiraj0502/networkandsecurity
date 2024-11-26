@@ -54,7 +54,12 @@ jobs:
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
-          cp config-ec2.yml config-ec2.yml
+          cp config-ec2.yml /tmp/config-ec2.yml
+
+      # Optionally, if you need to copy the hosts.ini file
+      - name: Copy hosts.ini file
+        run: |
+          cp hosts.ini /tmp/hosts.ini
 
       # Step 4: Run Ansible playbook
       - name: Run Ansible Playbook
@@ -63,7 +68,4 @@ jobs:
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"  # To avoid host key verification issues
 
-      # Optionally, if you need to copy the hosts.ini file
-      - name: Copy hosts.ini file
-        run: |
-          cp hosts.ini hosts.ini
+      
