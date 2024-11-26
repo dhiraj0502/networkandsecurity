@@ -10,7 +10,7 @@
       shell: yum update -y --disablerepo=amazon-linux-extras
       ignore_errors: true
 
-    - name: Update OpenSSL to 1.1.1 or later
+    - name: Update OpenSSL to 1.1.1 or later 
       shell: yum install -y openssl --disablerepo=amazon-linux-extras
       ignore_errors: true
 
@@ -43,4 +43,4 @@
         chdir: /home/ec2-user/docker
 
     - name: Run the Docker container
-      shell: docker run -d --name doccontainer -p 80:5000 docker
+      shell: docker run -d --name doccontainer -p 80:5000 docker 
