@@ -51,6 +51,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ansible
 
+      - name: Create SSH key file 
+        run: | 
+          echo "${{ secrets.EC2_SSH_KEY }}" > my-ec2-key.pem 
+          chmod 600 my-ec2-key.pem
+
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
