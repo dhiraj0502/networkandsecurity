@@ -43,4 +43,4 @@
         chdir: /home/ec2-user/docker
 
     - name: Run the Docker container
-      shell: docker run -d --name doccontainer -p 80:80 docker
+      shell: docker run -d --name doccontainer -p 80:5000 docker
