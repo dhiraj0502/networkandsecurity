@@ -59,8 +59,7 @@ jobs:
       # Optionally, if you need to copy the hosts.ini file
       - name: Copy hosts.ini file
         run: |
-          cp hosts.ini /tmp/hosts.ini
-
+          cp hosts.ini finalnetsec/Coding/ansible/hosts.ini
       # Step 4: Run Ansible playbook
       - name: Run Ansible Playbook
         run: |
