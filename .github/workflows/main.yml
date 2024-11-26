@@ -58,7 +58,7 @@ jobs:
 
       - name: Add SSH key to ssh-agent 
         run: | 
-          eval "$(ssh-agent -s)" ssh-add /home/ec2-user/my-ec2-key.pem
+          eval "$(ssh-agent -s)" ssh-add /home/runner/.ssh/my-ec2-key.pem
 
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
