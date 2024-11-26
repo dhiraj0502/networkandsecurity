@@ -54,7 +54,7 @@ jobs:
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
-          cp /ansible/config-ec2.yml /tmp/config-ec2.yml
+          cp config-ec2.yml config-ec2.yml
 
       # Step 4: Run Ansible playbook
       - name: Run Ansible Playbook
@@ -66,4 +66,4 @@ jobs:
       # Optionally, if you need to copy the hosts.ini file
       - name: Copy hosts.ini file
         run: |
-          cp hosts.ini /ansible/hosts.ini
+          cp hosts.ini hosts.ini
