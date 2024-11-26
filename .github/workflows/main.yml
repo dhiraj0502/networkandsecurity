@@ -54,7 +54,7 @@ jobs:
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
-          cp your_ansible_playbook.yml ansible/config-ec2.yml
+          cp config-ec2.yml ansible/config-ec2.yml
 
       # Step 4: Run Ansible playbook
       - name: Run Ansible Playbook
