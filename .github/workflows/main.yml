@@ -54,12 +54,12 @@ jobs:
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
-          cp config-ec2.yml ansible/config-ec2.yml
+          cp /ansible/config-ec2.yml /tmp/config-ec2.yml
 
       # Step 4: Run Ansible playbook
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i /ansible/hosts.ini /ansible/config-ec2.yml
+          ansible-playbook -i hosts.ini config-ec2.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"  # To avoid host key verification issues
 
