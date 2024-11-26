@@ -54,12 +54,12 @@ jobs:
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
-          cp config-ec2.yml /tmp/config-ec2.yml
+          cp finalnetsec/Coding/ansible/config-ec2.yml config-ec2.yml
 
       # Optionally, if you need to copy the hosts.ini file
       - name: Copy hosts.ini file
         run: |
-          cp hosts.ini finalnetsec/Coding/ansible/hosts.ini
+          cp finalnetsec/Coding/ansible/hosts.ini hosts.ini
       # Step 4: Run Ansible playbook
       - name: Run Ansible Playbook
         run: |
