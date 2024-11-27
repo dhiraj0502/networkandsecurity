@@ -37,7 +37,8 @@
        recursive: yes
 
     - name: Remove existing Docker container if it exists 
-      shell: | docker rm -f doccontainer || true
+      shell: | 
+       docker rm -f doccontainer || true
       
     - name: Build Docker image
       shell: docker build -t docker .
