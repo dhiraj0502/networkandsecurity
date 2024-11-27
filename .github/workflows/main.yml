@@ -21,8 +21,8 @@ jobs:
       # Step 3: Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t docker .
-
+          docker build --no-cache -t docker .
+          
       # Step 4: Log in to Docker Hub (or your private registry)
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
