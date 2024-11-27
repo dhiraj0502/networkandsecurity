@@ -57,11 +57,6 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/my-ec2-key
           chmod 600 ~/.ssh/my-ec2-key
 
-
-      - name: Add SSH key to ssh-agent 
-        run: | 
-          eval "$(ssh-agent -s)" ssh-add /home/runner/.ssh/my-ec2-key.pem
-
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
