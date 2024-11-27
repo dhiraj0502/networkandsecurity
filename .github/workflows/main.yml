@@ -51,12 +51,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ansible
 
-      - name: Create SSH key file 
+      - name: Set up SSH agent and add key 
         run: | 
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/my-ec2-key
-          chmod 600 ~/.ssh/my-ec2-key
-
+          echo "${{ secrets.EC2_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null 
+          env: SSH_AUTH_SOCK: /run/ssh-agent.sock
+    
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
         run: |
