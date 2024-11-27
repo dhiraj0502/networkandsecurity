@@ -29,9 +29,9 @@
         state: started
         enabled: yes
 
-   - name: Move application files to the correct directory on the remote server 
-     command: mv Dockerfile /home/ec2-user/docker
-     args:
+    - name: Move application files to the correct directory on the remote server 
+      shell: mv Dockerfile /home/ec2-user/docker
+      args:
         removes: Dockerfile
 
     - name: Build Docker image
