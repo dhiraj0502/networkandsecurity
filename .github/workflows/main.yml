@@ -53,8 +53,11 @@ jobs:
 
       - name: Create SSH key file 
         run: | 
-          echo "${{ secrets.EC2_SSH_KEY }}" > my-ec2-key.pem 
-          chmod 600 my-ec2-key.pem
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H your_server_ip >> ~/.ssh/known_hosts
+
 
       - name: Add SSH key to ssh-agent 
         run: | 
