@@ -61,7 +61,7 @@ jobs:
         run: | 
           echo "${{ secrets.EC2_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null 
         env: 
-          SSH_AUTH_SOCK: /run/ssh-agent.sock
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
     
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
