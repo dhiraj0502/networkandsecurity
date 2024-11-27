@@ -51,6 +51,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ansible
 
+      - name: Start SSH agent
+        id: ssh-agent-setup
+        run: | 
+          eval "$(ssh-agent -s)" env: SSH_AUTH_SOCK: /run/ssh-agent.sock
+
       - name: Set up SSH agent and add key 
         run: | 
           echo "${{ secrets.EC2_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null 
