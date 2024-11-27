@@ -29,11 +29,13 @@
         state: started
         enabled: yes
 
-    - name: Move application files to the correct directory on the remote server 
-      shell: mv Dockerfile /home/ec2-user/docker
-      args:
-        removes: Dockerfile
-
+    - name: Synchronize application files to the server 
+      synchronize: 
+       src: Dockerfile 
+       dest: /home/ec2-user/docker
+       delete: yes 
+       recursive: yes
+      
     - name: Build Docker image
       shell: docker build -t docker .
       args:
