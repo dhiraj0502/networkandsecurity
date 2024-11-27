@@ -54,12 +54,14 @@ jobs:
       - name: Start SSH agent
         id: ssh-agent-setup
         run: | 
-          eval "$(ssh-agent -s)" env: SSH_AUTH_SOCK: /run/ssh-agent.sock
-
+         eval "$(ssh-agent -s)"
+         echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
+         
       - name: Set up SSH agent and add key 
         run: | 
           echo "${{ secrets.EC2_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null 
-          env: SSH_AUTH_SOCK: /run/ssh-agent.sock
+        env: 
+          SSH_AUTH_SOCK: /run/ssh-agent.sock
     
       # Step 3: Copy Ansible playbook to runner
       - name: Copy Ansible playbook
@@ -76,5 +78,6 @@ jobs:
           ansible-playbook -i hosts.ini config-ec2.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"  # To avoid host key verification issues
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
 
       
