@@ -29,13 +29,10 @@
         state: started
         enabled: yes
 
-    - name: Copy application files to the server
-      copy:
-        src: /home/ec2-user/docker
-        dest: /home/ec2-user/docker
-        owner: ec2-user
-        group: ec2-user
-        mode: '0755'
+   - name: Move application files to the correct directory on the remote server 
+     command: mv Dockerfile /home/ec2-user/docker
+     args:
+        removes: Dockerfile
 
     - name: Build Docker image
       shell: docker build -t docker .
